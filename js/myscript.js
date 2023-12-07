@@ -53,7 +53,7 @@ document.getElementsByClassName("item")[activeItem].classList.add("active");
 const right = document.getElementById("button_right");
 const left = document.getElementById("button_left");
 
-// al click del bottone right spostiamo la classe active all'immagine successiva
+// al click del bottone right spostiamo la classe active all'immagine successiva e se è all'ultima immagin ritorna alla prima
 right.addEventListener("click", 
     function(){
         if(activeItem < images.length -1){
@@ -63,21 +63,32 @@ right.addEventListener("click",
 
             document.getElementsByClassName("item")[activeItem].classList.add("active");
 
+        } else if (activeItem === images.length - 1){
+            document.getElementsByClassName("item")[activeItem].classList.remove("active");
+
+            activeItem = 0;
+
+            document.getElementsByClassName("item")[activeItem].classList.add("active");
         }
 
     }
 )
  
 
-// al click del bottone left spostiamo la classe active all'immagine precedente
+// al click del bottone left spostiamo la classe active all'immagine precedente e se è alla prima immagine ritorna all'ultima
 left.addEventListener("click", 
     function(){
-        if(activeItem > 0){
-            document.getElementsByClassName("item")[activeItem].classList.remove("active");
+        document.getElementsByClassName("item")[activeItem].classList.remove("active");
 
+        if(activeItem === 0){
+
+            activeItem = images.length - 1;
+
+            document.getElementsByClassName("item")[ activeItem].classList.add("active");
+        } else{
             activeItem --;
 
-            document.getElementsByClassName("item")[activeItem].classList.add("active");
-        }
+            document.getElementsByClassName("item")[ activeItem].classList.add("active");
+        } 
     }
 )
